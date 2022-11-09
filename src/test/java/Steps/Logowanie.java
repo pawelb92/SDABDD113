@@ -3,8 +3,10 @@ package Steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Logowanie {
@@ -14,7 +16,7 @@ public class Logowanie {
     @Given("Uzytkownik otwiera przegladarke")
     public void testUzytkownikOtwieraPrzegladarke(){
         System.out.println("Uzytkownik otworzyl przegladarke");
-        System.setProperty("webdriver.chrome.driver","d:/chromedriver_win32/chromedriver.exe");
+       //System.setProperty("webdriver.chrome.driver","d:/chromedriver_win32/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -33,15 +35,20 @@ public class Logowanie {
     @When("Uzytkownik wpisuje poprawne haslo")
     public void uzytkownik_wpisuje_poprawne_haslo() {
         System.out.println("Uzytkownik wpisuje poprawne haslo");
+        WebElement inputPassword = driver.findElement(By.id("password"));
+        inputPassword.sendKeys("SuperSecretPassword!");
+
 
     }
     @When("Uzytkownik klika przycisk Login")
     public void uzytkownik_klika_przycisk_login() {
         System.out.println("Uzytkownik klika przycisk Login");
+        driver.findElement(By.className("radius")).click();
 
     }
     @Then("Uzytkownik został poprawnie zalogowany")
     public void uzytkownik_został_poprawnie_zalogowany() {
         System.out.println("Uzytkownik zostaje poprawnie zalogowany");
+        Assert.assertEquals("https://the-internet.herokuapp.com/secure", driver.getCurrentUrl());
     }
 }
