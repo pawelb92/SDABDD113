@@ -27,11 +27,22 @@ Feature: Logowanie do aplikacji
     And Uzytkownik klika przycisk Login
     Then Uzytkownik został poprawnie zalogowany
 
-
-    @now
   Scenario: Niepoprawne logowanie do aplikacji ( druga wersja )
     Given Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
     When Uzytkownik wpisuje "tomsmith" w pole username
     And Uzytkownik wpisuje "blablabla" w pole password
     And Uzytkownik klika przycisk Login
     Then Uzytkownik nie został poprawnie zalogowany
+
+  @now
+  Scenario Outline: Niepoprawne logowanie
+    Given Uzytkownik wpisuje adres "https://the-internet.herokuapp.com/login"
+    When Uzytkownik wpisuje <nazwaUzytkownika> w pole username
+    And Uzytkownik wpisuje <haslo> w pole password
+    And Uzytkownik klika przycisk Login
+    Then Uzytkownik nie został poprawnie zalogowany
+
+    Examples:
+      | nazwaUzytkownika | haslo  |
+      | tomsmith         | blabla |
+      | tomsmith         | aaaaa  |
