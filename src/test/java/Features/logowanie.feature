@@ -46,3 +46,5 @@ Feature: Logowanie do aplikacji
       | nazwaUzytkownika | haslo  |
       | tomsmith         | blabla |
       | tomsmith         | aaaaa  |
+      | tomsmith         | blabla2424 |
+      | tomsmith         | aaaaa22  |
